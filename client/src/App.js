@@ -7,7 +7,7 @@ class App extends Component {
         super(props);
         this.state = {
             name: '',
-            greeting: ''
+            text: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,7 +19,7 @@ class App extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        fetch(`/api/greeting?name=${encodeURIComponent(this.state.name)}`)
+        fetch(`/api/greeting`)
             .then(res => res.json())
             .then(state => this.setState(state));
     }
@@ -43,7 +43,7 @@ class App extends Component {
                         />
                         <button type="submit">Submit</button>
                     </form>
-                    <p>{this.state.greeting}</p>
+                    <p>{this.state.text}</p>
                     <a
                         className="App-link"
                         href="https://reactjs.org"

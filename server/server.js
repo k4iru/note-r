@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const port = 5000;
-const Pool = require('pg').Pool;
+const { Pool } = require('pg');
 
 const pool = new Pool({
     user: 'kyle',
@@ -11,18 +11,18 @@ const pool = new Pool({
     port: 5432,
 })
 
-
 const app = express();
+
 app.use(bodyParser.urlencoded({ extended: false}));
 
 app.get('/api/greeting', (req, res) => {
     pool
-        .query('SELECT NOW() as now')
-        .then(res => console.log(res.row[0]))
-        .catch(e => console.error(e.stack))
-    //const name = req.query.name || 'World';
-    //res.setHeader('Content-Type', 'application/json');
-    //res.send(JSON.stringify({ greeting: `Hello ${name}! from the server` }));
+      .query('SELECT markdown FROM mark')
+      .then(res => console.table(res.rows[0]))
+      .catch(e => console.error(e.stack))
+    const name = req.query.name || 'World';
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({ text: `hello ${res.rows}` }));
 });
 
 app.listen(port, () =>
