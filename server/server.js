@@ -33,15 +33,34 @@ const corsOptions = {
 app.use(helmet());
 app.use(cors(corsOptions))
 
-app.get('/api/greeting', (req, res) => {
-    client
-        .query('SELECT markdown FROM mark')
-        .then(result => {
-            console.table(result.rows[0].markdown)
-            res.send(JSON.stringify({ text: result.rows[0].markdown }));
-        })
-        .catch(e => console.error(e.stack))
-});
+
+connect();
+async function connect() {
+    try {
+        await client.connect();
+    }
+    catch(e) {
+        console.error(`Failed to connect ${e}`);
+    }
+}
+
+async function readMark() {
+    try {
+        const results = await client.query('SELECT markdown from mark');
+        console.table(results);
+        return results.rows;
+    }
+    catch(e){
+        return [];
+    }
+}
+
+app.get("/api/read", async (req, res) => {
+    const rows = await readMark();
+    res.setHeader("content-type", "application/json");
+    res.send(JSON.stringify({rows}));
+
+})
 
 app.listen(port, () =>
     console.log(`Express server is running on ${port}`)
