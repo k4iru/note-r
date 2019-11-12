@@ -19,7 +19,7 @@ class App extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        fetch(`/api/greeting`)
+        fetch(`/api/read`)
             .then(res => res.json())
             .then(state => this.setState(state));
     }
