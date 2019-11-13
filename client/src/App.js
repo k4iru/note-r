@@ -7,10 +7,8 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            text: 'ttt'
+            text: ''
         };
-        //this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -22,7 +20,10 @@ class App extends Component {
         e.preventDefault();
         fetch(`/api/read`)
             .then(res => res.json())
-            .then(state => this.setState(state));
+            .then(state => {
+                this.setState(state)
+            });
+
     }
 
     render() {
@@ -36,19 +37,11 @@ class App extends Component {
                     </p>
                     <form onSubmit={this.handleSubmit}>
                         <label htmlFor="name">Enter your name: </label>
-                        <input
-                            id="name"
-                            type="text"
-                            value={this.state.text}
-                            onChange={this.handleChange}
-                        />
                         <button type="submit">Submit</button>
                     </form>
                     <Text 
-                        type="text"
-                        id="name"
                         data={this.state.text}
-                        onChange={this.handleChange}
+                        onTextChange={this.handleChange}
                     />
                     <p>{this.state.text}</p>
                     <a
