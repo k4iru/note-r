@@ -1,10 +1,6 @@
 import React from 'react';
 
 class Text extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     handleTextChange = (e) => {
         this.props.onTextChange(e);
     }
@@ -12,8 +8,8 @@ class Text extends React.Component {
     render() {
         return (
             <textarea rows="4" cols="50"
-                onChange={this.handleTextChange}>
-                {this.props.data}
+                onChange={this.handleTextChange}
+                text={this.props.data}>
             </textarea>
         )
     }
