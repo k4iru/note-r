@@ -22,6 +22,7 @@ class App extends Component {
             .then(res => res.json())
             .then(state => {
                 this.setState(state)
+                console.log(this.state.text);
             });
 
     }
