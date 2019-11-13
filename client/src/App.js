@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Text from './components/Text';
 import logo from './logo.svg';
 import './App.css';
 
@@ -7,14 +8,14 @@ class App extends Component {
         super(props);
         this.state = {
             name: '',
-            text: ''
+            text: 'ttt'
         };
-        this.handleChange = this.handleChange.bind(this);
+        //this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(e) {
-        this.setState({ name: e.target.value });
+    handleChange = (e) => {
+        this.setState({ text: e.target.value });
     }
 
     handleSubmit(e) {
@@ -38,11 +39,17 @@ class App extends Component {
                         <input
                             id="name"
                             type="text"
-                            value={this.state.name}
+                            value={this.state.text}
                             onChange={this.handleChange}
                         />
                         <button type="submit">Submit</button>
                     </form>
+                    <Text 
+                        type="text"
+                        id="name"
+                        data={this.state.text}
+                        onChange={this.handleChange}
+                    />
                     <p>{this.state.text}</p>
                     <a
                         className="App-link"
