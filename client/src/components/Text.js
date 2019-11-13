@@ -12,8 +12,8 @@ class Text extends React.Component {
     render() {
         return (
             <textarea rows="4" cols="50"
-                onChange={this.handleTextChange}>
-                {this.props.data}
+                onChange={this.handleTextChange}
+                text={this.props.data}>
             </textarea>
         )
     }
