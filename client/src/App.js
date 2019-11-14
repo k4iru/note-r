@@ -17,17 +17,20 @@ class App extends Component {
         this.setState({ text: e.target.value });
     }
 
-    handleSubmit(e) {
+    // retrieve from DB
+    handleSubmit = async (e) => {
         e.preventDefault();
-        fetch(`/api/read`)
-            .then(res => res.json())
-            .then(state => {
-                this.setState(state)
-                console.log(this.state.text);
-            });
-
+        try {
+            const fetchResponse = await fetch('/api/read');
+            const result = await fetchResponse.json()
+            this.setState({ text: result.rows[0].markdown });
+            console.log('hello');
+        } catch(e) {
+            return e;
+        }
     }
 
+    // send file to DB
     handleConvert = async (e) => {
         e.preventDefault();
         const settings = {
