@@ -33,17 +33,25 @@ class App extends Component {
     // send file to DB
     handleConvert = async (e) => {
         e.preventDefault();
+        /*
         const settings = {
             method: 'POST',
+            mode: 'cors',
             headers: {
-                Accept: 'text/html',
-                'Content-Type': 'text/html',
+                'Content-Type': 'application/json',
             }
         };
-
+        */
         try {
-            const fetchResponse = await fetch('/api/update', settings);
-            const data = await fetchResponse.json();
+            const response = await fetch('/api/update', {
+            method: 'POST',
+            mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text: this.state.text})
+            });
+            const data = await response.json();
             return data;
         } catch (e) {
             return e;
