@@ -10,6 +10,7 @@ class App extends Component {
             text: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleConvert = this.handleConvert.bind(this);
     }
 
     handleChange = (e) => {
@@ -27,6 +28,24 @@ class App extends Component {
 
     }
 
+    handleConvert = async (e) => {
+        e.preventDefault();
+        const settings = {
+            method: 'POST',
+            headers: {
+                Accept: 'text/html',
+                'Content-Type': 'text/html',
+            }
+        };
+
+        try {
+            const fetchResponse = await fetch('/api/update', settings);
+            const data = await fetchResponse.json();
+            return data;
+        } catch (e) {
+            return e;
+        }
+    }
     render() {
 
         return (
@@ -38,8 +57,12 @@ class App extends Component {
                     </p>
                     <form onSubmit={this.handleSubmit}>
                         <label htmlFor="name">Enter your name: </label>
-                        <button type="submit">Submit</button>
+                        <button type="submit">Retrieve from DB</button>
                     </form>
+                <form onSubmit={this.handleConvert}>
+                    <button type="submit">UPDATE</button>
+                </form>
+
                     <Text 
                         data={this.state.text}
                         onTextChange={this.handleChange}
