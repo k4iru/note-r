@@ -64,7 +64,6 @@ app.get("/api/read", async (req, res) => {
 app.post("/api/update", async (req, res) => {
     console.log(req.body.text);
     const result = await update(req.body.text);
-    res.send('hehe');
 
 })
 

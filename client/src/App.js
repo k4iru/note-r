@@ -24,7 +24,6 @@ class App extends Component {
             const fetchResponse = await fetch('/api/read');
             const result = await fetchResponse.json()
             this.setState({ text: result.rows[0].markdown });
-            console.log('hello');
         } catch(e) {
             return e;
         }
@@ -33,15 +32,6 @@ class App extends Component {
     // send file to DB
     handleConvert = async (e) => {
         e.preventDefault();
-        /*
-        const settings = {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        };
-        */
         try {
             const response = await fetch('/api/update', {
             method: 'POST',
