@@ -17,21 +17,10 @@ const client = new Pool({
 const app = express();
 app.use(express.json());
 
-// allows resource sharing 
-const whitelist = ['http://localhost:3000']
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1 || !origin) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-}
-
 // apply HTTP headers 
 app.use(helmet());
-app.use(cors(corsOptions))
+// allows resource sharing 
+app.use(cors())
 
 
 connect();
@@ -46,19 +35,36 @@ async function connect() {
 
 async function readMark() {
     try {
-        const results = await client.query('SELECT markdown from mark');
-        console.table(results);
-        return results.rows;
+        const result = await client.query('SELECT markdown from mark');
+        console.table(result);
+        return result.rows;
     }
     catch(e){
         return [];
     }
 }
 
+async function update(data) {
+    try {
+        const result = await client.query(`UPDATE mark SET markdown = '${data}'`);
+        return result.rows;
+    }
+    catch(e){
+        return e;
+    }
+}
+
 app.get("/api/read", async (req, res) => {
     const rows = await readMark();
-    res.setHeader("content-type", "application/json");
+    res.setHeader("Content-type", "application/json");
     res.send(JSON.stringify({rows}));
+
+})
+
+app.post("/api/update", async (req, res) => {
+    console.log(req.body.text);
+    const result = await update(req.body.text);
+    res.send('hehe');
 
 })
 

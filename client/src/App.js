@@ -52,6 +52,7 @@ class App extends Component {
                 body: JSON.stringify({ text: this.state.text})
             });
             const data = await response.json();
+            console.log(data);
             return data;
         } catch (e) {
             return e;
