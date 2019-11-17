@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Text from './components/Text';
+import Editor from './components/Editor';
 import logo from './logo.svg';
 import './App.css';
 
@@ -66,7 +66,7 @@ class App extends Component {
                     <button type="submit">UPDATE</button>
                 </form>
 
-                    <Text 
+                    <Editor 
                         text={this.state.text}
                         onTextChange={this.handleChange}
                     />
