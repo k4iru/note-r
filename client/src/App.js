@@ -30,6 +30,7 @@ class App extends Component {
     }
 
     // send file to DB
+    // update
     handleConvert = async (e) => {
         e.preventDefault();
         try {
@@ -66,7 +67,7 @@ class App extends Component {
                 </form>
 
                     <Text 
-                        data={this.state.text}
+                        text={this.state.text}
                         onTextChange={this.handleChange}
                     />
                     <p>{this.state.text}</p>
