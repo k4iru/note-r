@@ -19,7 +19,7 @@ class Text extends React.Component {
 
     render() {
         return (
-            <textarea rows="4" cols="50"
+            <textarea rows="12" cols="80"
                 onChange={this.handleTextChange}
                 text={this.state.text}>
             </textarea>
