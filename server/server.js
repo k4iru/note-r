@@ -3,6 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const port = 5000;
 const { Pool } = require('pg');
+const showdown = require('showdown');
 
 // client connection
 // TODO migrate over to dotenv
@@ -33,8 +34,10 @@ async function connect() {
     }
 }
 
+// retrieve document
 async function readMark() {
     try {
+        const query = "SELECT markdown_content FROM documents WHERE id=?"
         const result = await client.query('SELECT markdown from mark');
         console.table(result);
         return result.rows;
@@ -44,6 +47,7 @@ async function readMark() {
     }
 }
 
+// update document 
 async function update(data) {
     try {
         const result = await client.query(`UPDATE mark SET markdown = '${data}'`);
@@ -54,6 +58,27 @@ async function update(data) {
     }
 }
 
+// save new document
+async function store_doc(data) {
+    try {
+    }
+    catch(e) {
+    }
+}
+// convert document 
+async function compile_doc(data) {
+    try {
+
+        let test ='# hellom markdown!'
+        const converter = new showdown.Converter();
+        const html = converter.makeHtml(data || test);
+        console.log(html);
+        return html;
+    }
+    catch(e) {
+        return e;
+    }
+}
 app.get("/api/read", async (req, res) => {
     const rows = await readMark();
     res.setHeader("Content-type", "application/json");
@@ -64,6 +89,8 @@ app.get("/api/read", async (req, res) => {
 app.post("/api/update", async (req, res) => {
     console.log(req.body.text);
     const result = await update(req.body.text);
+    let test = '# hello markdown!'
+    const test_result = await compile_doc(test);
 
 })
 

@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/k4iru/note-r/issues"
   },
-  "homepage": "https://github.com/k4iru/note-r#readme"
+  "homepage": "https://github.com/k4iru/note-r#readme",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
 }
