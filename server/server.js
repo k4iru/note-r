@@ -37,7 +37,6 @@ async function connect() {
 // retrieve document
 async function readMark() {
     try {
-        const query = "SELECT markdown_content FROM documents WHERE id=?"
         const result = await client.query('SELECT markdown from mark');
         console.table(result);
         return result.rows;
@@ -61,6 +60,10 @@ async function update(data) {
 // save new document
 async function store_doc(data) {
     try {
+        const query_text = 
+            "INSERT INTO documents (markdown_content) VALUES (?) RETURNING id"
+        const result = await client.query(query_text, data);
+        const stored_id = result.fetchone()[0];
     }
     catch(e) {
     }
