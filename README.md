@@ -10,6 +10,6 @@ allows users to write notes using markdown and convert to markdown
 * Storage
 * custom css settings
 * ability to share html pages
-
+* jest and CI
 
 
