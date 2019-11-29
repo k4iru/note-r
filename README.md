@@ -1,4 +1,4 @@
-# Note Taking App WIP
+# Note Taking App
 
 allows users to write notes using markdown and convert to markdown
 
