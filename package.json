@@ -1,7 +1,7 @@
 {
   "name": "note-r",
   "version": "1.0.0",
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" ",
@@ -15,8 +15,8 @@
     "type": "git",
     "url": "git+https://github.com/k4iru/note-r.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Kyle Cheung",
+  "license": "",
   "bugs": {
     "url": "https://github.com/k4iru/note-r/issues"
   },
